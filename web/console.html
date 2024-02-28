@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Custom classes -->
+    <script src="./js/FrogUI.js"></script>
+    <script src="./js/FrogBackendCommunicator.js"></script>
+    <script src="./js/toaster.js"></script>
+    <!-- Custom CSS -->
+    <link href="./css/main.css" rel="stylesheet" />
+    <link href="./css/switch.css" rel="stylesheet" />
+    <link href="./css/toasts.css" rel="stylesheet" />
+    <link href="./css/window.css" rel="stylesheet" />
+
+    <!-- Flowbite -->
+    <link href="./css/flowbite.min.css" rel="stylesheet" />
+    <script src="./js/flowbite.min.js"></script>
+
+    <!-- Animate and icons -->
+    <link href="./css/animate.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,500,0,0"
+    />
+    <title>Консоль разработчика</title>
+  </head>
+  <body>
+    <div class="h-full w-full bg-gray-900">
+      <!-- Titlebar (drag zone) with buttons-->
+      <div class="titlebar">
+        <div class="titlebar-caption grow">Консоль разработчика</div>
+        <div class="titlebar-buttons">
+          <div
+            class="btn"
+            onclick="FrogBackendCommunicator.onHideConsoleWindow()"
+          >
+            <span class="material-symbols-rounded">remove</span>
+          </div>
+          <div
+            class="btn"
+            onclick="FrogBackendCommunicator.onCloseConsoleWindow()"
+          >
+            <span class="material-symbols-rounded">close</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main area -->
+      <div class="console-textarea w-full bg-gray-800"></div>
+      <!-- Actions -->
+      <div class="flex px-5 mt-2">
+        <div class="flex items-center grow">
+          <span class="text-white text-lg mr-2"
+            >Прокручивать автоматически</span
+          >
+          <label class="switch">
+            <input type="checkbox" id="autoScrollCheckbox" checked />
+            <span class="slider round bg-gray-600"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>
+
+<style>
+  .titlebar {
+    width: 100%;
+    height: max-content;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .titlebar .titlebar-buttons {
+    display: flex;
+  }
+
+  .titlebar .titlebar-caption {
+    font-size: 14pt;
+    font-family: "Minecraft Rus";
+    color: white;
+    -webkit-app-region: drag;
+  }
+
+  .console-textarea {
+    color: white;
+    padding: 8px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 82%;
+  }
+
+  .console-textarea,
+  .console-textarea * {
+    -webkit-user-select: text !important;
+    user-select: text !important;
+  }
+
+  .console-textarea,
+  .console-textarea:hover,
+  .console-textarea:focus {
+    outline: none;
+    appearance: none;
+    border: 0;
+    box-shadow: none;
+  }
+
+  input:checked + .slider {
+    background-color: #1c64f2;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #1c64f2;
+  }
+</style>
+
+<script>
+  var MAX_CONSOLE_LINES = 300;
+  // Console log from backend event handler
+  ipcRenderer.on("user-console-log", function (event, data) {
+    if ($(".console-textarea").length > 0) {
+      // Checking is console not crowded with many lines (def limit = 300)
+      if ($(".console-textarea span").length >= MAX_CONSOLE_LINES) {
+        $(".console-textarea span").eq(0).remove();
+      }
+      $(".console-textarea").html(
+        $(".console-textarea").html() + "<span>" + data + "<br></span>"
+      );
+    }
+    if ($("#autoScrollCheckbox").is(":checked")) {
+      $(".console-textarea").scrollTop($(".console-textarea")[0].scrollHeight);
+    }
+  });
+</script>

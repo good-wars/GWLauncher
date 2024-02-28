@@ -1,0 +1,66 @@
+/* Custom input */
+.custom-input {
+  outline: none !important;
+  border: none !important;
+  appearance: none !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+  background: var(--bg-primary-1000) !important;
+  padding: 12px !important;
+  font-size: 11pt !important;
+  font-weight: 500 !important;
+}
+
+.custom-input:disabled {
+  background: rgb(25, 25, 25);
+  color: var(--bg-primary-200);
+}
+
+/* Custom button */
+.custom-button {
+  outline: none !important;
+  border: none !important;
+  appearance: none !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+  background: var(--bg-primary-600) !important;
+  padding: 12px !important;
+  font-size: 11pt !important;
+  font-weight: 500 !important;
+}
+
+.custom-button:disabled {
+  background: rgb(55, 55, 55) !important;
+  color: var(--bg-primary-200) !important;
+}
+
+.custom-button:not(:disabled):hover {
+  background: var(--bg-primary-500) !important;
+}
+
+/* Custom select */
+.custom-select {
+  outline: none !important;
+  appearance: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border: 1px solid rgba(165, 165, 176, 0.25) !important;
+  padding: 14px !important;
+  border-radius: 8px !important;
+  font-size: 11pt !important;
+  font-weight: 500 !important;
+}
+
+.custom-select option {
+  background: var(--bg-primary-1100) !important;
+  border-radius: 2px;
+}
+
+/* Styling loader */
+svg.animate-spin path:first-child {
+  color: transparent !important;
+}
+
+svg.animate-spin {
+  fill: white;
+}

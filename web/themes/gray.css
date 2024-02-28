@@ -1,0 +1,25 @@
+html.gray:root {
+  --bg-primary-300: #d1d5db;
+  --bg-primary-400: #9ca3af;
+  --bg-primary-500: #6b7280;
+  --bg-primary-600: #4b5563;
+  --bg-primary-700: #374151;
+  --bg-primary-800: #1f2937;
+  --bg-primary-900: #111827;
+  --bg-primary-1000: #2c2c2c;
+  --bg-primary-1100: #141414;
+  --bg-primary-anim: #1f2937;
+  --bg-primary-transparent: rgba(53, 53, 53, 0.4);
+}
+
+.gray-theme-color {
+  background: #4b5563;
+}
+
+.gray-theme-color-darker {
+  background: #374151;
+}
+
+.gray-theme-color-bg {
+  background: #1f2937;
+}

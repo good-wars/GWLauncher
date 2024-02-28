@@ -1,0 +1,78 @@
+{
+  "name": "gwlauncher",
+  "version": "1.0.17",
+  "description": "Yea, another Minecraft launcher based on Electron and web technologies",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron .",
+    "build-win": "electron-builder build --win --publish never",
+    "build-linux": "electron-builder build --linux --publish never"
+  },
+  "author": "Seeroy",
+  "license": "MIT-3.0",
+  "homepage": "good-wars.github.io",
+  "devDependencies": {
+    "electron": "^26.6.10",
+    "electron-builder": "^24.4.0"
+  },
+  "build": {
+    "productName": "GWLauncher",
+    "appId": "",
+    "copyright": "",
+    "directories": {
+      "buildResources": "resources"
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "rpm",
+        "tar.gz"
+      ],
+      "maintainer": "Seeroy",
+      "vendor": "Seeroy",
+      "icon": "web/assets/icon-foreground.png"
+    },
+    "win": {
+      "asar": true,
+      "target": "nsis",
+      "icon": "resources/icon.ico"
+    },
+    "publish": {
+      "provider": "generic",
+      "url": "http://froglauncher.seeroy.ru/updates"
+    },
+    "nsis": {
+      "installerIcon": "resources/icon.ico",
+      "installerHeaderIcon": "resources/icon.ico",
+      "deleteAppDataOnUninstall": false,
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "**/*",
+      "node_modules/**/*",
+      "!logs{/*}",
+      "!logs/",
+      "!logs",
+      "!cache{/*}",
+      "!config.json",
+      "!frog_accounts.json",
+      "!.gitignore",
+      "!.git{/*}"
+    ]
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "decompress": "^4.2.1",
+    "electron-root-path": "^1.1.0",
+    "electron-updater": "^6.1.1",
+    "glob": "^10.3.3",
+    "jquery": "^3.7.0",
+    "machine-uuid": "^1.2.0",
+    "marked": "^5.1.2",
+    "minecraft-launcher-core": "^3.17.1",
+    "msmc": "^4.1.0",
+    "open": "^8.4.0",
+    "request": "^2.88.2"
+  }
+}

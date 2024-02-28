@@ -1,0 +1,332 @@
+<div id="themes-mmodal" class="modal-bg hidden">
+  <div class="modal-window bg-primary-1100">
+    <div class="flex items-center mb-2">
+      <div class="flex grow">
+        <div class="modal-caption modal-tabs active" data-tab="themes-tab">
+          Темы
+        </div>
+        <div class="modal-caption modal-tabs" data-tab="personalization-tab">
+          Внешний вид
+        </div>
+      </div>
+      <button
+        type="button"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+        onclick="FrogUI.goHomeSection()"
+      >
+        <span class="material-symbols-rounded">close</span>
+      </button>
+    </div>
+
+    <div class="modal-themes-tab" id="themes-tab">
+      <div class="grid grid-cols-4 gap-4 my-4" id="themes-grid"></div>
+    </div>
+
+    <div class="modal-themes-tab hidden" id="personalization-tab">
+      <p>Шрифт</p>
+      <ul
+        class="text-sm font-medium text-center rounded-lg shadow flex text-gray-400 mt-3 catselector"
+        id="font-selector"
+      >
+        <li class="w-full">
+          <div class="inline-block w-full p-4" data-font="mc">
+            <span class="mc-text text-white" style="font-size: 24px">Aa</span>
+            <span class="ml-3 text-white">Только Minecraft Rus</span>
+          </div>
+        </li>
+        <li class="w-full">
+          <div class="inline-block w-full p-4" data-font="default">
+            <span class="ml-3 text-white">По умолчанию</span>
+          </div>
+        </li>
+        <li class="w-full">
+          <div class="inline-block w-full p-4" data-font="gt">
+            <span
+              class="text-white"
+              style="font-size: 24px; font-family: 'Golos Text' !important"
+              >Aa</span
+            >
+            <span class="ml-3 text-white">Только Golos Text</span>
+          </div>
+        </li>
+      </ul>
+
+      <p class="mt-3">Фон в лаунчере</p>
+      <ul
+        class="text-sm font-medium text-center rounded-lg shadow flex text-gray-400 mt-3 catselector"
+        id="bg-selector"
+      >
+        <li class="w-full">
+          <div class="inline-block w-full p-4">
+            <span class="text-white">1</span>
+          </div>
+        </li>
+        <li class="w-full">
+          <div class="inline-block w-full p-4">
+            <span class="text-white">2</span>
+          </div>
+        </li>
+        <li class="w-full">
+          <div class="inline-block w-full p-4">
+            <span class="text-white">3</span>
+          </div>
+        </li>
+        <li class="w-full">
+          <div class="inline-block w-full p-4">
+            <span class="text-white">4</span>
+          </div>
+        </li>
+        <li class="w-full">
+          <div class="inline-block w-full p-4">
+            <span class="text-white">5</span>
+          </div>
+        </li>
+        <li class="w-full">
+          <div class="inline-block w-full p-4">
+            <span class="text-white">6</span>
+          </div>
+        </li>
+      </ul>
+
+      <button
+        class="custom-button mt-3 w-full"
+        onclick="FrogBackendCommunicator.openBackgroundSelectDialog()"
+      >
+        Выбрать свой фон
+      </button>
+
+      <div class="flex items-center mt-3">
+        <p>Анимированный фон</p>
+      </div>
+
+      <ul
+        class="text-sm font-medium text-center rounded-lg shadow flex text-gray-400 mt-3 catselector"
+        id="bg-anim-selector"
+      >
+        <li class="w-full">
+          <div class="inline-block w-full p-4" data-bg="b">
+            <span class="text-white">Птицы</span>
+          </div>
+        </li>
+        <li class="w-full">
+          <div class="inline-block w-full p-4" data-bg="c">
+            <span class="text-white">Облака</span>
+          </div>
+        </li>
+        <li class="w-full">
+          <div class="inline-block w-full p-4" data-bg="w">
+            <span class="text-white">Волны</span>
+          </div>
+        </li>
+        <li class="w-full">
+          <div class="inline-block w-full p-4" data-bg="d">
+            <span class="text-white">Точки</span>
+          </div>
+        </li>
+        <li class="w-full">
+          <div class="inline-block w-full p-4" data-bg="h">
+            <span class="text-white">Круговые волны</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="flex items-center my-3">
+        <span class="text-white text-lg mr-2"
+          >Отключить анимации</span
+        >
+        <label class="switch">
+          <input type="checkbox" id="disableAnimationsCheckbox" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <div class="flex items-center my-3">
+        <span class="text-white text-lg mr-2"
+          >Отключить размытие</span
+        >
+        <label class="switch">
+          <input type="checkbox" id="disableBlurCheckbox" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .new-theme-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    grid-template-rows: 42px 42px;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    border: 1px solid rgb(120, 120, 120);
+    border-radius: 9px;
+    width: 100%;
+    height: max-content;
+    grid-template-areas:
+      "clr-1 main"
+      "clr-2 main";
+  }
+
+  .new-theme-item:not(.active) {
+    cursor: pointer;
+  }
+
+  .new-theme-item.active {
+    border-radius: 11px;
+    border: 2px solid rgb(24, 138, 24) !important;
+  }
+
+  .new-theme-item .clr-1 {
+    grid-area: clr-1;
+    border-top-left-radius: 8px;
+  }
+
+  .new-theme-item .clr-2 {
+    grid-area: clr-2;
+    border-bottom-left-radius: 8px;
+  }
+
+  .new-theme-item .main {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    grid-area: main;
+    padding: 15px 0 0 8px;
+    align-self: end;
+    justify-self: start;
+    height: 100%;
+  }
+
+  .new-theme-item .example {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10pt;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+  }
+
+  .new-theme-item .name {
+    font-size: 16pt;
+  }
+</style>
+
+<script>
+  if(localStorage.disableAnimations == 'true'){
+    $("#disableAnimationsCheckbox").attr("checked", "checked");
+  }
+
+  if(localStorage.disableBlur == 'true'){
+    $("#disableBlurCheckbox").attr("checked", "checked");
+  }
+
+  $("#disableBlurCheckbox").change(function () {
+    if($(this).is(":checked")){
+      localStorage.setItem("disableBlur", "true");
+    } else {
+      localStorage.setItem("disableBlur", "false");
+    }
+    FrogUI.refreshUIDisablers()
+  })
+
+  $("#disableAnimationsCheckbox").change(function () {
+    if($(this).is(":checked")){
+      localStorage.setItem("disableAnimations", "true");
+    } else {
+      localStorage.setItem("disableAnimations", "false");
+    }
+    FrogUI.refreshUIDisablers()
+  })
+
+  $("#themes-mmodal .modal-tabs").click(function () {
+    if (!$(this).hasClass("active")) {
+      $("#themes-mmodal .modal-tabs.active").removeClass("active");
+      $(this).addClass("active");
+      $("#themes-mmodal .modal-themes-tab:not(.hidden)").addClass("hidden");
+      $("#" + $(this).data("tab")).removeClass("hidden");
+    }
+  });
+
+  $("#themes-mmodal #font-selector li .inline-block").each((i, elem) => {
+    if ($(elem).data("font") == mainConfig.selectedBaseFont) {
+      $(elem).addClass("active");
+      $("html").addClass("font-" + mainConfig.selectedBaseFont);
+    }
+  });
+
+  $("#themes-mmodal #font-selector li .inline-block").click(function () {
+    if (!$(this).hasClass("active")) {
+      $("#themes-mmodal #font-selector li .inline-block.active").removeClass(
+        "active"
+      );
+      $(this).addClass("active");
+      $("html").removeClass("font-gt font-mc");
+      $("html").addClass("font-" + $(this).data("font"));
+      mainConfig.selectedBaseFont = $(this).data("font");
+      FrogConfigManager.writeAndRefreshMainConfig(mainConfig);
+    }
+  });
+
+  $("#themes-mmodal #bg-selector li .inline-block").each((i, elem) => {
+    if ($(elem).find("span").text() == mainConfig.selectedBackground) {
+      $(elem).addClass("active");
+      $("html").addClass("bg-" + mainConfig.selectedBackground);
+    }
+  });
+
+  $("#themes-mmodal #bg-selector li .inline-block").click(function () {
+    $("#themes-mmodal #bg-anim-selector li .inline-block.active").removeClass(
+      "active"
+    );
+    if (!$(this).hasClass("active")) {
+      FrogAnimatedBackgrounds.stopBackground();
+      $("#themes-mmodal #bg-selector li .inline-block.active").removeClass(
+        "active"
+      );
+      $(this).addClass("active");
+      $("html").removeClass("bg-1 bg-2 bg-3 bg-4 bg-5 bg-6");
+      $("html").addClass("bg-" + $(this).find("span").text());
+      mainConfig.selectedBackground = $(this).find("span").text();
+      FrogConfigManager.writeAndRefreshMainConfig(mainConfig);
+    }
+  });
+
+  $("#themes-mmodal #bg-anim-selector li .inline-block").each((i, elem) => {
+    if ($(elem).data("bg") == mainConfig.selectedBackground) {
+      $(elem).addClass("active");
+    }
+  });
+
+  $("#themes-mmodal #bg-anim-selector li .inline-block").click(function () {
+    $("#themes-mmodal #bg-selector li .inline-block.active").removeClass(
+      "active"
+    );
+    if (!$(this).hasClass("active")) {
+      $("#themes-mmodal #bg-anim-selector li .inline-block.active").removeClass(
+        "active"
+      );
+      $(this).addClass("active");
+      $("html").removeClass("bg-1 bg-2 bg-3 bg-4 bg-5 bg-6");
+      FrogAnimatedBackgrounds.stopBackground();
+      FrogAnimatedBackgrounds.startAnimationByName($(this).data("bg"));
+      mainConfig.selectedBackground = $(this).data("bg");
+      FrogConfigManager.writeAndRefreshMainConfig(mainConfig);
+    }
+  });
+
+  // Handle background selection
+  ipcRenderer.on("get-bg-result", (event, arg) => {
+    if (arg != false) {
+      var cext = path.extname(arg);
+      fs.copyFileSync(
+        arg,
+        path.join(__appData, "AppCache", "custom-bg" + cext)
+      );
+      FrogUI.refreshCustomBg("custom-bg" + cext);
+    }
+  });
+</script>

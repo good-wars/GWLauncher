@@ -1,0 +1,219 @@
+.window-frame,
+.preloader-container,
+.main-bg,
+#drawer-toasts-list {
+  border: 1px solid rgb(50, 50, 50);
+}
+
+.window-frame,
+.preloader-container,
+.main-bg,
+#drawer-toasts-list,
+body,
+html,
+.modal-bg,
+.blackscreen,
+.main-bg canvas {
+  border-radius: 16px;
+}
+
+.sidebar {
+  border-top-left-radius: 16px;
+}
+
+.window-frame {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: 1fr max-content;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "sidebar content"
+    "controls controls";
+}
+
+.window-frame .controls {
+  grid-area: controls;
+}
+
+.window-frame .sidebar {
+  grid-area: sidebar;
+}
+
+.window-frame .content {
+  grid-area: content;
+}
+
+/* Preloader container styling */
+.preloader-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20000;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.preloader-container img {
+  height: 128px;
+}
+
+.preloader-container .preloader-copyright {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 32px;
+  width: max-content;
+  height: max-content;
+  z-index: 20001;
+  margin: auto;
+}
+
+/* Main background image styling */
+.main-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1000;
+  margin: auto;
+  filter: brightness(60%) saturate(106%) blur(2px);
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
+.main-bg:has(canvas) {
+  filter: brightness(31%) !important;
+}
+
+html.bg-1 .main-bg {
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    url("../assets/backgrounds/1.jpg");
+}
+html.bg-2 .main-bg {
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    url("../assets/backgrounds/2.jpg");
+}
+html.bg-3 .main-bg {
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    url("../assets/backgrounds/3.jpg");
+}
+html.bg-4 .main-bg {
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    url("../assets/backgrounds/4.jpg");
+}
+html.bg-5 .main-bg {
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    url("../assets/backgrounds/5.jpg");
+}
+html.bg-6 .main-bg {
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    url("../assets/backgrounds/6.jpg");
+}
+
+/* Invisible bar for dragging */
+.dragbar {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.dragbar .dragzone {
+  width: 85vw;
+  margin-right: 15vw;
+  height: 32px;
+  -webkit-app-region: drag;
+}
+
+.dragbar .actions {
+  position: absolute;
+  z-index: 5;
+  top: 16px;
+  right: 16px;
+  width: max-content;
+  height: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.dragbar .actions .btn,
+.titlebar .titlebar-buttons .btn {
+  background: transparent;
+  border-radius: 8px;
+  padding: 6px;
+  margin: 0 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dragbar .actions .btn *,
+.titlebar .titlebar-buttons .btn * {
+  color: white;
+}
+
+.dragbar .actions .btn:hover,
+.titlebar .titlebar-buttons .btn:hover {
+  background: rgb(255, 255, 255, 0.11);
+}
+
+/* Scrollbars styling */
+*::-webkit-scrollbar {
+  width: 3px;
+  border-radius: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}

@@ -1,0 +1,25 @@
+html.minecrafty:root {
+  --bg-primary-300: #d7ffb7;
+  --bg-primary-400: #98e05d;
+  --bg-primary-500: #6aa738;
+  --bg-primary-600: #477a1e;
+  --bg-primary-700: #3f681d;
+  --bg-primary-800: #396416;
+  --bg-primary-900: #294e0b;
+  --bg-primary-1000: #1d310c;
+  --bg-primary-1100: #121d09;
+  --bg-primary-anim: #233317;
+  --bg-primary-transparent: rgba(36, 75, 21, 0.4);
+}
+
+.minecrafty-theme-color {
+  background: #477a1e;
+}
+
+.minecrafty-theme-color-darker {
+  background: #294e0b;
+}
+
+.minecrafty-theme-color-bg {
+  background: #233317;
+}

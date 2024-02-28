@@ -1,0 +1,25 @@
+html.yellow:root {
+  --bg-primary-300: #fdf6b2;
+  --bg-primary-400: #fce96a;
+  --bg-primary-500: #faca15;
+  --bg-primary-600: #e3a008;
+  --bg-primary-700: #c27803;
+  --bg-primary-800: #9f580a;
+  --bg-primary-900: #8e4b10;
+  --bg-primary-1000: #292311;
+  --bg-primary-1100: #131006;
+  --bg-primary-anim: #3b2d01;
+  --bg-primary-transparent: rgba(68, 62, 35, 0.4);
+}
+
+.yellow-theme-color {
+  background: #e3a008;
+}
+
+.yellow-theme-color-darker {
+  background: #9f580a;
+}
+
+.yellow-theme-color-bg {
+  background: #3b2d01;
+}

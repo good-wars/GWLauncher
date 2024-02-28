@@ -1,0 +1,263 @@
+<div
+  class="controls bg-primary-transparent p-3 animate__animated animate__fadeInUp animate__faster flex"
+  style="min-height: 82px"
+>
+  <button
+    type="button"
+    id="show-users-select"
+    class="py-2.5 px-5 text-sm text-white font-medium focus:outline-none rounded-lg focus:z-10"
+  >
+    Аккаунт не выбран
+  </button>
+
+  <button
+    type="button"
+    id="show-version-selector"
+    class="py-2.5 px-5 text-sm text-white font-medium focus:outline-none rounded-lg focus:z-10 grow ml-3"
+    onclick="FrogUI.showMenuModal('version-selector')"
+  >
+    Версия не выбрана
+  </button>
+
+  <button
+    type="button"
+    class="mc-text custom-button text-white ml-3 flex items-center justify-center"
+    id="play-button"
+    onclick="FrogStartManager.startSelectedVersion()"
+  >
+    <span class="mc-text">Играть</span>
+    <span class="material-symbols-rounded"> play_arrow </span>
+  </button>
+  <button
+    type="button"
+    class="custom-button text-white ml-3"
+    id="open-game-directory-button"
+  >
+    <span class="material-symbols-rounded mt-1 w-10">folder_open</span>
+  </button>
+  <div
+    class="progress-cont hidden flex items-center"
+    style="width: 100vw; padding: 8px 10px"
+  >
+    <div class="flex flex-col justify-center grow">
+      <div
+        class="text-white text-sm progress-desc flex items-center align-items"
+      >
+        <div class="spinner hidden mr-3 ml-2">
+          <svg
+            aria-hidden="true"
+            class="inline w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"
+            viewBox="0 0 100 101"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+              fill="currentColor"
+            />
+            <path
+              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+              fill="currentFill"
+            />
+          </svg>
+          <span class="sr-only">Loading...</span>
+        </div>
+        <p class="text grow"></p>
+        <p class="filename"></p>
+      </div>
+      <div class="w-full rounded-full h-2.5 progress mt-2"></div>
+    </div>
+    <div id="progress-badge" class="flex items-center justify-center">
+      <div role="status" class="mr-3">
+        <svg
+          aria-hidden="true"
+          class="inline w-4 h-4 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"
+          viewBox="0 0 100 101"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+            fill="currentColor"
+          />
+          <path
+            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+            fill="currentFill"
+          />
+        </svg>
+        <span class="sr-only">Loading...</span>
+      </div>
+      <span class="text-white text-md progress-txt">0%</span>
+    </div>
+  </div>
+</div>
+
+<div class="floating-notify h-2 font-semibold hidden" id="fabricapi-notify">
+  Внимание: Мод FabricAPI устанавливается
+  <span class="font-bold">автоматически</span>, это поведение можно изменить в
+  настройках лаунчера
+</div>
+
+<div
+  class="users-select-modal hidden no-transition flex-col items-center justify-center bg-primary-1100 drop-modal"
+></div>
+
+<div
+  class="new-account-modal hidden no-transition flex-col items-center justify-center bg-primary-1100 drop-modal"
+>
+  <div
+    class="flex p-2 rounded user-item"
+    onclick="FrogAccountUI.newLocalAccountWizard()"
+  >
+    <div class="text-white">Локальный аккаунт</div>
+  </div>
+  <div
+    class="flex p-2 rounded mt-2 user-item"
+    onclick="FrogAccountUI.newMSAccountWizard()"
+  >
+    <div class="text-white">Аккаунт Microsoft</div>
+  </div>
+  <div
+    class="flex p-2 rounded mt-2 user-item"
+    onclick="FrogAccountUI.newElybyAccountWizard()"
+  >
+    <div class="text-white">Аккаунт Ely.by</div>
+  </div>
+  <div
+    class="flex p-2 rounded mt-2 user-item"
+    onclick="$('.new-account-modal').addClass('hidden')"
+  >
+    <div class="text-white">Отмена</div>
+  </div>
+</div>
+
+  <div
+    class="flex p-2 rounded mt-2 user-item"
+    onclick="$('.open-directories-modal').addClass('hidden')"
+  >
+    <!-- <div class="text-white">Отмена</div>
+  </div> -->
+</div>
+
+<script>
+  $(".users-select-modal").click(() => {
+    $(".users-select-modal").addClass("hidden");
+  });
+
+  $("#open-game-directory-button").mouseup((event) => {
+    if (event.originalEvent.button == 0) {
+      FrogUI.openGameDirectory();
+    } else {
+      $(".open-directories-modal").removeClass("hidden");
+      FrogUI.refreshAbsoluteElementsPositions();
+    }
+  });
+
+  $("#show-users-select").click(() => {
+    if ($(".users-select-modal").hasClass("hidden")) {
+      $(".users-select-modal").removeClass("hidden");
+      FrogUI.refreshAbsoluteElementsPositions();
+    } else {
+      $(".users-select-modal").addClass("hidden");
+    }
+    $(".new-account-modal").addClass("hidden");
+  });
+</script>
+
+<style>
+  .progress-cont .progress .bg-primary-600 {
+    box-shadow: 0px 0px 16px 1px var(--bg-primary-900);
+  }
+
+  .drop-modal {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: max-content;
+    padding: 8px;
+    border-radius: 12px;
+    width: 224px;
+    z-index: 3;
+  }
+
+  .drop-modal:not(.open-directories-modal) {
+    left: 0;
+  }
+
+  .drop-modal .user-item {
+    cursor: pointer;
+  }
+
+  .drop-modal .user-item:hover {
+    background: var(--bg-primary-900);
+  }
+
+  #show-users-select,
+  #show-version-selector {
+    background: var(--bg-primary-1100);
+    font-size: 12pt;
+  }
+
+  #show-users-select {
+    min-width: 256px;
+  }
+
+  #show-users-select:hover,
+  #show-version-selector:hover {
+    background: var(--bg-primary-1000);
+  }
+
+  #play-button {
+    width: 170px;
+    font-weight: 500;
+    font-size: 14pt !important;
+    padding: 0;
+    background: rgb(8, 138, 97) !important;
+  }
+
+  #play-button:hover {
+    background: rgb(7, 107, 76) !important;
+  }
+
+  #play-button .material-symbols-rounded {
+    font-size: 28pt;
+  }
+
+  .floating-notify {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: max-content;
+    width: max-content;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 11pt;
+    z-index: 4;
+    background: #014470;
+    opacity: 0.9;
+    color: white;
+  }
+
+  #progress-badge {
+    box-shadow: 0px 0px 21px 1px var(--bg-primary-800);
+    border-radius: 4px;
+    padding: 6px;
+    margin-left: 12px;
+    background: var(--bg-primary-700);
+    width: max-content;
+    height: max-content;
+  }
+
+  .progress,
+  .progress * {
+    transition: 0s !important;
+    animation-duration: 0s !important;
+  }
+
+  .controls .progress.w-full {
+    background: rgba(85,85,85,0.55);
+  }
+</style>

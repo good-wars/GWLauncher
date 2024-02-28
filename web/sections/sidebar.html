@@ -1,0 +1,125 @@
+<div
+  class="sidebar h-full bg-primary-transparent p-3 animate__animated animate__fadeInLeft animate__faster animate__delay_cst"
+>
+  <img src="assets/icon-foreground.png" class="logo jabb" />
+  <div class="flex flex-col items-center justify-center grow">
+    <div
+      class="sidebar-item active bg-primary-600 flex items-center"
+      data-tooltip="Домашняя страница"
+      data-modal="home"
+      >
+      <span class="material-symbols-rounded"> home </span>
+    </div>
+    
+  
+    <div
+      class="sidebar-item flex items-center"
+      data-tooltip="Настройки"
+      data-modal="settings"
+    >
+      <span class="material-symbols-rounded"> settings </span>
+    </div>
+    <div
+      class="sidebar-item flex items-center"
+      data-tooltip="Консоль разработчика"
+      onclick="FrogBackendCommunicator.onOpenConsoleWindow()"
+    >
+      <span class="material-symbols-rounded"> terminal </span>
+    </div>
+    <div
+      class="sidebar-item flex items-center"
+      data-tooltip="Темы и персонализация"
+      data-modal="themes"
+    >
+      <span class="material-symbols-rounded"> palette </span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sidebar {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .sidebar .logo {
+    width: 48px;
+  }
+
+  .sidebar .sidebar-item:not(.active) {
+    background: var(--bg-primary-1100);
+    cursor: pointer;
+  }
+
+  .sidebar .sidebar-item:not(.active):hover {
+    background: var(--bg-primary-1000) !important;
+  }
+
+  .sidebar .sidebar-item {
+    margin: 8px 0;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+  }
+
+  .sidebar .sidebar-item.active {
+    box-shadow: 0px 0px 32px 2px var(--bg-primary-900);
+  }
+
+  .sb-tooltip {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    color: white;
+    padding: 6px;
+    text-align: center;
+    border-radius: 4px;
+    width: max-content;
+    height: max-content;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  $(".sidebar-item:not(.active)").hover(function () {
+    showSidebarTooltip(this);
+  });
+
+  $(".sidebar-item:not(.active)").mouseleave(function () {
+    hideSidebarTooltip();
+  });
+
+  $(".sidebar-item:not(.active)").click(function () {
+    hideSidebarTooltip();
+    var modalData = $(this).data("modal");
+    if (modalData !== "" && $("#" + modalData + "-mmodal").length > 0) {
+      FrogUI.setSidebarActiveItemByModalData(modalData);
+      FrogUI.showMenuModal(modalData);
+    }
+  });
+
+  function showSidebarTooltip(sbItem) {
+    tooltipText = $(sbItem).data("tooltip");
+    sbItemBoundings = $(sbItem)[0].getBoundingClientRect();
+    tooltipX = sbItemBoundings.x + sbItemBoundings.width + 16;
+    tooltipY = sbItemBoundings.y + 3;
+    $("body").append(
+      "<div class='sb-tooltip bg-primary-700 animate__animated animate__fadeIn animate__faster' style='top: " +
+        tooltipY +
+        "px; left: " +
+        tooltipX +
+        "px;'>" +
+        tooltipText +
+        "</div>"
+    );
+  }
+
+  function hideSidebarTooltip() {
+    $(".sb-tooltip").remove();
+  }
+</script>
